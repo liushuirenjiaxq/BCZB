@@ -10,7 +10,7 @@ import com.bczb.pojo.Result;
 import com.bczb.pojo.User;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.exceptions.SqlException;
-import com.bczb.service.IUserService;
+import com.bczb.IUserService;
 import com.bczb.utils.TokenUtils;
 import javax.annotation.Resource;
 
@@ -30,9 +30,6 @@ public class SignInController {
 
         User user = this.userService.getUserInfo(45);
         System.out.println(user.toString());
-        //User user = this.userService.getUserByName(loginParam.name);
-        //this.userService.equalPassword(loginParam.getPassword(), user.getPassword());
-        //String token = TokenUtils.createToken(user);
 
         return "OK";
     }
@@ -40,6 +37,7 @@ public class SignInController {
     @Resource
     private IUserService userService;
 
+    //登录接口，参数:Json格式，形如 {"name": "测试1","password": "123"}
     @PostMapping("/login")
     public Result signIn(@RequestBody LoginParam loginParam) throws BusinessException {
         User user = this.userService.getUserByName(loginParam.name);

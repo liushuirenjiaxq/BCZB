@@ -34,6 +34,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserByName(String name) throws BusinessException {
+        System.out.println("service_1: ok");
         User user = this.userMapper.selectByName(name);
         if (user == null) {
             throw new BusinessException("用户不存在");
