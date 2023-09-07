@@ -18,13 +18,13 @@ public interface UserMapper {
     public int countByName(String name);
 
     @Select("select "+
-            " id, name,power,password, tele,status"+
+            " id, name,password,power, tele,status"+
             " from user where name = #{name} and status != 1")
     public User selectByName(String name);
 
     // 通过 id 获取用户信息
     @Select("select "+
-            " id, name,power,password, tele,status"+
+            " id, name,password,power, tele,status"+
             " from user where id = #{id} and status != 1")
     public User selectById(Integer id);
 

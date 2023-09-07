@@ -1,6 +1,5 @@
 package com.bczb.controller;
 
-import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +12,8 @@ import com.bczb.pojo.Result;
 import com.bczb.pojo.User;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.service.IUserService;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("api/user")
