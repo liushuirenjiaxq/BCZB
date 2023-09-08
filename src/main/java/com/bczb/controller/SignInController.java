@@ -37,7 +37,7 @@ public class SignInController {
     @Resource
     private IUserService userService;
 
-    //登录接口，参数:Json格式，形如 {"name": "测试1","password": "123"}
+    //登录接口，参数: Json格式，形如 {"name": "测试1","password": "123"}
     @PostMapping("/login")
     public Result signIn(@RequestBody LoginParam loginParam) throws BusinessException {
         User user = this.userService.getUserByName(loginParam.name);
@@ -46,6 +46,7 @@ public class SignInController {
         return Result.data(token);
     }
 
+    //注册接口，参数: Json格式, 形如 {"name": "测试3","password": "123","tele": "11","power": 0}
     @PostMapping("/register")
     public Result signUp(@RequestBody RegisterParams params) throws SqlException {
         boolean isExist = this.userService.isExist(params.name);
