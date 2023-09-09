@@ -1,4 +1,4 @@
-package com.bczb.service;
+package com.bczb;
 
 import org.springframework.stereotype.Service;
 import com.bczb.pojo.User;

@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bczb.pojo.Result;
 import com.bczb.pojo.User;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.exceptions.SqlException;
 import com.bczb.IUserService;
 import com.bczb.utils.TokenUtils;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/signin")
@@ -37,16 +37,22 @@ public class SignInController {
     @Resource
     private IUserService userService;
 
-    //登录接口，参数: Json格式，形如 {"name": "测试1","password": "123"}
+    //登录验证，传入参数: Json {String, String}，形如 {"name": "测试1","password": "123"}
     @PostMapping("/login")
     public Result signIn(@RequestBody LoginParam loginParam) throws BusinessException {
         User user = this.userService.getUserByName(loginParam.name);
         this.userService.equalPassword(loginParam.getPassword(), user.getPassword());
+//        System.out.println(user.getName());
+//        System.out.println(user.getId());
+//        System.out.println(user.getPower());
+        //User user = this.userService.getUserByName("测试1");
         String token = TokenUtils.createToken(user);
+        //System.out.println(token);
+        //request.setAttribute("uId", user.getName());
         return Result.data(token);
     }
 
-    //注册接口，参数: Json格式, 形如 {"name": "测试3","password": "123","tele": "11","power": 0}
+    //注册接口，参数: Json {String, String, String, int}, 形如 {"name": "测试3","password": "123","tele": "11","power": 0}
     @PostMapping("/register")
     public Result signUp(@RequestBody RegisterParams params) throws SqlException {
         boolean isExist = this.userService.isExist(params.name);

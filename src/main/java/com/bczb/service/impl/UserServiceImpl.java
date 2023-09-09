@@ -1,10 +1,10 @@
-package com.bczb.service.impl;
+package com.bczb.impl;
 
 import com.bczb.dao.UserMapper;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.exceptions.SqlException;
 import com.bczb.pojo.User;
-import com.bczb.service.IUserService;
+import com.bczb.IUserService;
 
 import com.bczb.utils.SaltMD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User getUserByName(String name) throws BusinessException {
-        System.out.println("service_1: ok");
         User user = this.userMapper.selectByName(name);
         if (user == null) {
             throw new BusinessException("用户不存在");
