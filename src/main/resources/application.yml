@@ -2,9 +2,6 @@ server:
   port: 8000
 
 spring:
-  thymeleaf:
-    cache: false # ????
-
   datasource:
     url: jdbc:mysql://localhost:3306/bczb?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&allowMultiQueries=true
     username: root
@@ -22,11 +19,12 @@ spring:
     date-format: yyyy-MM-dd
     time-zone: GMT+8
 
+
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.bczb.*.pojo
   configuration:
-    map-underscore-to-camel-case: true  # ????
+    map-underscore-to-camel-case: true
 
 logging:
   level:
