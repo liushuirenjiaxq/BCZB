@@ -24,7 +24,8 @@ public class GroupController {
     @Resource
     private IExperimentService experimentService;
 
-    // 添加组别
+    // 添加组别 参数: Json [{String, int, [{String, int, String}]}]
+    // 示例: [{"exId": 25, "name": "三七组", "rats": [{"gender": "male", "cage": 1, "index": "33" }, { "gender": "female", "cage": 2, "index": "11"}]}, {"exId": 25, "name": "藏红花组", "rats": [{"gender": "male", "cage": 1, "index": "22"}, {"gender": "female", "cage": 2, "index": "77"}]}]
     @PostMapping("/")
     public Result addGroups(@RequestBody ArrayList<RatGroup> groups) throws BusinessException {
         try {
@@ -43,7 +44,7 @@ public class GroupController {
     }
 
 
-    // 查询一个实验的组别
+    // 查询一个实验的组别 参数: int 示例: 23
     @GetMapping("/{exId}")
     public Result getExpGroups(@PathVariable("exId") Integer exId) throws BusinessException {
         boolean isExist = this.groupService.isExpExist(exId);
@@ -54,7 +55,7 @@ public class GroupController {
         return Result.data(groups);
     }
 
-    // 查询所有组别
+    // 查询所有组别 无参数
     @GetMapping("/")
     public Result getAllGroups() {
         ArrayList<Group> groups = this.groupService.getAllGroups();

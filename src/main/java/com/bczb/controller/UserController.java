@@ -20,7 +20,8 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    // 获取用户信息 无参数
+    // 获取用户信息
+    // 无参数
     @GetMapping("/")
     public Result getUserInfo(@RequestAttribute("uId") Integer uId) {
         //Integer uId = 45;
@@ -31,7 +32,8 @@ public class UserController {
         return Result.data(user);
     }
 
-    // 修改用户信息 无参数
+    // 修改用户信息
+    // 无参数
     @PutMapping("/")
     public Result updateUserInfo(@RequestAttribute("uId") Integer uId, @RequestBody User user) throws BusinessException {
         if (uId == null) {
@@ -44,7 +46,8 @@ public class UserController {
         return Result.success();
     }
 
-    // 根据uId获取用户信息 参数: int
+    // 根据uId获取用户信息
+    // 参数: int
     @GetMapping("/{uId}")
     public Result getUserInfoByUId(@PathVariable("uId") Integer uId) {
         User user = userService.getUserInfo(uId);
