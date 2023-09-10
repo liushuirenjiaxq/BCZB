@@ -41,9 +41,10 @@ public class ExperimentController {
         return Result.data(expList);
     }
 
-    //通过uId获取实验列表
+    //通过uId获取实验列表 参数: int, 为登录的账号的 uId
     @GetMapping("user/{uId}")
     public Result getExpListByUId(@PathVariable("uId") Integer uId, @RequestAttribute("uId") Integer uId2) {
+        System.out.println("////// uId " + uId2);
         if(!uId2.equals(uId)) {
             return Result.error("用户信息不匹配");
         }
@@ -53,6 +54,8 @@ public class ExperimentController {
         ArrayList<Experiment> expList = this.experimentService.getExpListByUId(uId);
         return Result.data(expList);
     }
+
+    //查询实验信息 参数: int, 为实验的 exId
     @GetMapping("/{exId}")
     public Result getExpByExId(@PathVariable("exId") Integer exId) {
         if(exId == null) {
@@ -62,7 +65,8 @@ public class ExperimentController {
         return Result.data(experiment);
     }
 
-    // 修改实验信息
+    // 修改实验信息 参数: Json {int, String, String, String, String, int, int},
+    // 形如 {"exId":23,"name":"测试实验1","startDate":"2023-07-18","endDate":null,"ratName":"SD 大鼠","status":1,"ownerId":45}
     @PutMapping("/")
     public Result updateExp(@RequestBody Experiment experiment, @RequestAttribute("uId") Integer uId) throws BusinessException  {
         if(experiment.getOwnerId() != uId.intValue()){
@@ -71,7 +75,7 @@ public class ExperimentController {
         this.experimentService.updateRuningExp(experiment.getExId(), experiment.getName(), experiment.getStartDate(),  experiment.getRatName());
         return Result.success();
     }
-    // 修改实验状态
+    // 修改实验状态 参数: int, int , 实验Id和状态码
     @PutMapping("/{exId}/{status}")
     public Result updateExpStatus(@PathVariable("exId") Integer exId, @PathVariable("status") Integer status) throws BusinessException  {
         // 判断exId和status是否为数字
@@ -81,6 +85,8 @@ public class ExperimentController {
         this.experimentService.updateExpStatus(exId, status);
         return Result.success();
     }
+
+    //删除实验 参数: int, exId
     @DeleteMapping("/{exId}")
     public Result deleteExp(@PathVariable("exId") Integer exId,@RequestAttribute("uId") Integer uId ) throws BusinessException  {
         if(this.experimentService.getExpByExId(exId).getOwnerId() != uId.intValue()){

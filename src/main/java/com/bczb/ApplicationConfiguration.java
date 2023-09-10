@@ -1,10 +1,19 @@
 package com.bczb;
 
+import com.bczb.interceptor.AuthInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class ApplicationConfiguration implements WebMvcConfigurer {
+
+//	@Bean
+//	public HandlerInterceptor getInterceptor(){
+//		return new AuthInterceptor();
+//	}
+
 	@Override
 	public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
 		registry.addMapping("/**")
