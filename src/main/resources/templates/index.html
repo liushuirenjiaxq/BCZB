@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
     <link rel="icon" th:href="@{/img/favicon.ico}">
+    <script th:src="@{/js/jquery.js}"></script>
     <title>本草之本</title>
     <style>
         body{
@@ -57,12 +58,25 @@
     <P>本草之本</P>
     <input id="a" type="text" placeholder="用户名">
     <input id="b" type="password" placeholder="密码">
-    <input id="dr" class="btn" type="button" value="登 录" onclick="login">
-    <input id="zc" class="btn" type="button" value="注 册" onclick="han">
+    <input id="dr" class="btn" type="button" value="登 录" onclick="login()">
+    <input id="zc" class="btn" type="button" value="注 册" onclick="han()">
 </form>
 <script>
 function login(){
-
+    console.log("lisjifa");
+    $.ajax({
+        url:'api/signin/login',
+        data:{
+            a:"李小桥",
+            b:123
+        },
+        type:'POST',
+        success:function(data){
+            if(data.code == 200){
+                window.location = '/success.html';
+            }
+        }
+    })
 }
 </script>
 </body>
