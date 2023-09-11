@@ -20,6 +20,7 @@ public class SignInController {
 
     @GetMapping("/test")
     public String hello() {
+        System.out.println("test");
         return "Hello World!";
     }
 
@@ -36,10 +37,7 @@ public class SignInController {
 //        System.out.println(user.getName());
 //        System.out.println(user.getId());
 //        System.out.println(user.getPower());
-        //User user = this.userService.getUserByName("测试1");
         String token = TokenUtils.createToken(user);
-        //System.out.println(token);
-        //request.setAttribute("uId", user.getName());
         return Result.data(token);
     }
 

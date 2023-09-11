@@ -2,6 +2,7 @@
 <html lang="ch" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <script th:src="@{/layui/layui.js}"></script>
     <link rel="icon" th:href="@{/img/favicon.ico}">
     <script th:src="@{/js/jquery.min.js}"></script>
     <title>本草之本</title>
@@ -63,20 +64,37 @@
 </form>
 <script>
 function login(){
-    console.log("lisjifa");
+    let name = $("#a").val();
+    let password = $("#b").val();
+    if (name == ''){
+        layer.msg('用户名不能为空');
+        return false;
+    }
+    if (password == '') {
+        layer.msg('密码不能为空');
+        return false;
+    }
     $.ajax({
         url:'api/signin/login',
-        data:{
-            a:"李小桥",
-            b:123
-        },
+        data:JSON.stringify({
+            name:name,
+            password:password
+        }),
         type:'POST',
+        dataType:'json',
+        timeout: 0,
+        headers: {
+            "Content-Type": "application/json"
+        },
         success:function(data){
             if(data.code == 200){
-                window.location = '/success.html';
+                window.location.href = 'main';
             }
         }
     })
+}
+function han(){
+    /*注册*/
 }
 </script>
 </body>
