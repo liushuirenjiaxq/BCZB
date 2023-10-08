@@ -13,11 +13,6 @@ public class TokenUtils {
     private static String Signature = "2dn8Q3YVh9Hz0Ds";
     public static String createToken(User user){
         JwtBuilder jwtBuilder = Jwts.builder();
-//        System.out.println(user.getName());
-//        System.out.println(user.getId());
-//        System.out.println(user.getPower());
-//        System.out.println(System.currentTimeMillis());
-//        System.out.println(Signature);
         Map valueMap = new HashMap<String, Object>();
         valueMap.put("id", user.getId());
         valueMap.put("expiryDate", System.currentTimeMillis() + time);

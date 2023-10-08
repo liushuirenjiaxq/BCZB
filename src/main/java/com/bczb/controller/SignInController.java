@@ -34,9 +34,6 @@ public class SignInController {
     public Result signIn(@RequestBody LoginParam loginParam) throws BusinessException {
         User user = this.userService.getUserByName(loginParam.name);
         this.userService.equalPassword(loginParam.getPassword(), user.getPassword());
-//        System.out.println(user.getName());
-//        System.out.println(user.getId());
-//        System.out.println(user.getPower());
         String token = TokenUtils.createToken(user);
         return Result.data(token);
     }
@@ -54,6 +51,12 @@ public class SignInController {
         User user = new User(null, params.password, params.name, params.power, params.tele, 0);
         this.userService.addUser(user);
         return Result.success();
+    }
+
+    // 退出登录
+    @PostMapping("/exit")
+    public Result logout() {
+        return Result.data("成功");
     }
 
     static class LoginParam {

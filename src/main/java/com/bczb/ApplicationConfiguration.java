@@ -28,7 +28,9 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry registry) {
 		registry.addInterceptor(new com.bczb.interceptor.AuthInterceptor())
+				//拦截请求
 				.addPathPatterns("/api/**")
+				//放行请求
 				.excludePathPatterns("/api/signin/**");
 	}
 

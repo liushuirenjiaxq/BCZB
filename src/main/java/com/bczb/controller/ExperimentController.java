@@ -6,6 +6,7 @@ import com.bczb.pojo.Result;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.service.IExperimentService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 
@@ -18,9 +19,8 @@ public class ExperimentController {
     private IExperimentService experimentService;
 
     @RequestMapping("/test")
-
     public Result hello() throws BusinessException {
-
+        System.out.println("test");
         return Result.data("Hello World!");
     }
 

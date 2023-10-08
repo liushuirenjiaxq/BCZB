@@ -53,6 +53,5 @@ public class UserController {
         User user = userService.getUserInfo(uId);
         return Result.data(user);
     }
-
 }
 

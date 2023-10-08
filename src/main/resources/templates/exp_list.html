@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+    <title>本草之本</title>
+</head>
+<body>
+<div class="layui-container" style="max-width: 23%; margin: 0 10px; background-color: white; padding: 15px">
+
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add" id="addExp"> 创建实验 </button>
+    </div>
+
+    <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+</div>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script th:inline="none">
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#currentTableId',
+            url: 'http://localhost:8000/api/exp/',
+            headers: {"Authorization": localStorage.getItem('Authorization')},
+            width: 500,
+            height: 450,
+            response: {
+                statusCode: 200
+            },
+            cols: [[
+                {field: 'exId', width: '30%', title: 'id'},
+                {field: 'name', width: '40%', title: '实验列表'},
+                {field: 'status', title: '状态'}
+            ]],
+            done: function (res, urr, count){
+                //
+            },
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+
+
+        /**
+         * toolbar监听事件
+         */
+        $('#addExp').click(function (){
+            var index = layer.open({
+                title: '创建实验',
+                type: 2,
+                shade: 0.2,
+                maxmin:true,
+                shadeClose: true,
+                area: ['50%', '50%'],
+                offset: 'auto',
+                content: './exp_add_1.html',
+            });
+        })
+
+        table.on('row(currentTableFilter)',function(obj){
+            let str = './exp_detail.html?exId=' + obj.data.exId;
+            alert(str);
+            //window.parent.showTab(obj.data.exId,str,obj.data.name);
+            window.location.href = './exp_detail.html?exId=' + obj.data.exId;
+        })
+    });
+</script>
+</body>
+</html>
