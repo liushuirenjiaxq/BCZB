@@ -1,9 +1,12 @@
 package com.bczb;
 
+import com.bczb.pojo.vo.Idname;
 import org.springframework.stereotype.Service;
 import com.bczb.pojo.User;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.exceptions.SqlException;
+
+import java.util.ArrayList;
 
 @Service
 public interface IUserService {
@@ -22,4 +25,7 @@ public interface IUserService {
 
     public void updateUserInfo(User user) throws BusinessException;
 
+    public ArrayList<Idname> selectNames();
+
+    public void updataPass(String name, String pass);
 }

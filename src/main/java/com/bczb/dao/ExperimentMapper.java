@@ -13,14 +13,17 @@ import java.util.ArrayList;
 @Mapper
 public interface ExperimentMapper {
 
+    /*通过实验的名称查询实验的所有信息*/
     @Select ("select "
     +" ex_id as exId,  name, start_date as startDate, end_date as endDate, rat_name as ratName, status, owner_id as ownerId"
     +" from experiment where name = #{name}")
     public Experiment selectByName(String name) ;
 
+    /*创建实验(插入新的实验) ex_id[自增] end_date[实验结束时候插入]*/
     @Insert("insert into experiment(name, start_date, rat_name, owner_id) values(#{name}, #{startDate}, #{ratName}, #{ownerId})")
     public void InsertExp(String name,String startDate, String ratName, int ownerId);
 
+    /*查询所有实验的信息*/
     @Select("select "
     +" ex_id as exId,  name, start_date as startDate, end_date as endDate, rat_name as ratName, status, owner_id as ownerId"
     +" from experiment")

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Rat {
     private Integer rId;
-
     private String gId;
     private String gender;
     private Integer cage;

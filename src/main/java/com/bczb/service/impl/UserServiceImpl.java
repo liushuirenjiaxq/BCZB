@@ -3,12 +3,15 @@ package com.bczb.impl;
 import com.bczb.dao.UserMapper;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.exceptions.SqlException;
+import com.bczb.pojo.vo.Idname;
 import com.bczb.pojo.User;
 import com.bczb.IUserService;
 
 import com.bczb.utils.SaltMD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -21,7 +24,12 @@ public class UserServiceImpl implements IUserService {
         return count > 0;
     }
 
-
+    // 查询所有用户id和姓名，并返回一个对象数组
+    @Override
+    public ArrayList<Idname> selectNames(){
+        ArrayList<Idname> list = userMapper.selectNames();
+        return list;
+    }
 
     @Override
     public void addUser(User user) throws SqlException {
@@ -67,5 +75,11 @@ public class UserServiceImpl implements IUserService {
             throw new BusinessException("用户名已存在");
         }
         this.userMapper.updateUser(user.getId(), user.getName(), user.getTele());
+    }
+
+    @Override
+    public void updataPass(String name, String pass){
+        String password = addSalt(pass);
+        this.userMapper.updatePass(name, password);
     }
 }

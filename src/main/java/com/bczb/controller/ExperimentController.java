@@ -6,7 +6,6 @@ import com.bczb.pojo.Result;
 import com.bczb.exceptions.BusinessException;
 import com.bczb.service.IExperimentService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 

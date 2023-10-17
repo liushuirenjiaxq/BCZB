@@ -27,7 +27,6 @@ public class TeamMateController {
     // 加入团队
     @PostMapping("/")
     public Result joinTeam(@RequestBody AddTeamMateParams addTeamMateParams) throws BusinessException  {
-        
         this.teamMateService.joinTeam(addTeamMateParams.exId, addTeamMateParams.teamMateName);
         return Result.success();
     }
