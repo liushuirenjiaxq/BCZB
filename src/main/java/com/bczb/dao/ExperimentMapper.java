@@ -30,7 +30,13 @@ public interface ExperimentMapper {
     public ArrayList<Experiment> selectExpList();
 
     @Update("update experiment set name = #{name}, start_date = #{startDate}, rat_name = #{ratName} where ex_id = #{exId}")
-    public void updateExp(int exId, String name, String startDate, String ratName) ;
+    public void updateExp(int exId, String name, String startDate, String ratName);
+
+    @Update("update experiment set end_date = NOW() where ex_id = #{exId}")
+    public void updateExpEndDate(Integer exId);
+
+    @Update("update experiment set end_date = NULL where ex_id = #{exId}")
+    public void updateExpEndDateNull(Integer exId);
 
     @Update("update experiment set status = #{status} where ex_id = #{exId}")
     public void updateExpStatus(Integer exId, Integer status);

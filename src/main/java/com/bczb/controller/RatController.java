@@ -98,6 +98,8 @@ public class RatController {
 
     // 通过exId查询实验的大鼠
     @GetMapping("/exp/{exId}")
+
+
     public Result GetAllRatByExId(@PathVariable Integer exId) {
         // 实验是否存在判断
         if (!this.ratService.isExpExist(exId)) {

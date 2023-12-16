@@ -119,7 +119,7 @@ public class RecIntakeController implements IRecController<IntakeElement, Intake
         return Result.success();
     }
 
-    // 删除记录（未实现）
+    // 删除记录
     // 参数: Json {int, int, int, int}
     // 示例: [{"initialWeight":"12",  "nextdayWeight":"24", "intake":"12" , "id":"181"}]
     @Override

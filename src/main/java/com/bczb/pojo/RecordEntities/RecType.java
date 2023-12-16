@@ -28,6 +28,18 @@ public class RecType {
     public static class RatElement {
         private Integer rId;
         private String index;
+
+        public Integer getRId() {
+            return rId;
+        }
+
+        public void setRId(Integer rId) {
+            this.rId = rId;
+        }
+
+        public void setrId(Integer rId) {
+            this.rId = rId;
+        }
     }
 
     @AllArgsConstructor
@@ -108,8 +120,6 @@ public class RecType {
 
         @Select("select name  from `group` where g_id=#{gId}")
         String GetGroupName(String gId);
-
-        
 
         @Insert("insert into rec_record(gid,rec_type,recer,date) values(#{gid},#{recType},#{recer},#{date})")
         void RecRecord(RecRecord<Rec> record);

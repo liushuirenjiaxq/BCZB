@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("api/exp")
-
 public class ExperimentController {
 
     @Resource
@@ -32,7 +31,8 @@ public class ExperimentController {
         this.experimentService.createExp(expParams.getName(),expParams.getRatName(), expParams.getOwnerId());
         Experiment experiment = this.experimentService.getExpByName(expParams.getName());
         this.experimentService.joinTeam(experiment.getExId(), expParams.getOwnerId());
-        return Result.success();
+        // 返回实验id 控制器会录入数据并开启实验
+        return Result.data(experiment.getExId());
     }
 
     // 获取实验列表
@@ -74,6 +74,7 @@ public class ExperimentController {
     // 示例: {"exId":23,"name":"测试实验1","startDate":"2023-07-18","endDate":null,"ratName":"SD 大鼠","status":1,"ownerId":45}
     @PutMapping("/")
     public Result updateExp(@RequestBody Experiment experiment, @RequestAttribute("uId") Integer uId) throws BusinessException  {
+        //System.out.println(experiment.toString());
         if(experiment.getOwnerId() != uId.intValue()){
             return Result.error("只有实验创建者才能修改实验信息");
         }
@@ -149,7 +150,4 @@ public class ExperimentController {
         }
         
     }
-
-
-
 }

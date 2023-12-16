@@ -86,4 +86,17 @@ public class Experiment {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Experiment{" +
+                "exId=" + exId +
+                ", name='" + name + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", ratName='" + ratName + '\'' +
+                ", status=" + status +
+                ", ownerId=" + ownerId +
+                '}';
+    }
 }

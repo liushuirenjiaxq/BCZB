@@ -24,10 +24,11 @@ public class GroupController {
     @Resource
     private IExperimentService experimentService;
 
-    // 添加组别 参数: Json [{String, int, [{String, int, String}]}]
+    // 添加组别 参数: Json [{int, String, [{String, int, String}]}]
     // 示例: [{"exId": 25, "name": "三七组", "rats": [{"gender": "male", "cage": 1, "index": "33" }, { "gender": "female", "cage": 2, "index": "11"}]}, {"exId": 25, "name": "藏红花组", "rats": [{"gender": "male", "cage": 1, "index": "22"}, {"gender": "female", "cage": 2, "index": "77"}]}]
     @PostMapping("/")
     public Result addGroups(@RequestBody ArrayList<RatGroup> groups) throws BusinessException {
+        System.out.println(groups);
         try {
             for (RatGroup group : groups) {
                 String id = this.groupService.generateId();

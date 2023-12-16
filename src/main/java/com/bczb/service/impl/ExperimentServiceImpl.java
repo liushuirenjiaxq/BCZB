@@ -58,6 +58,11 @@ public class ExperimentServiceImpl implements IExperimentService {
             throw new BusinessException("实验不存在");
         }
         this.experimentMapper.updateExpStatus(exId, status);
+        if(status == 2){
+            this.experimentMapper.updateExpEndDate(exId);
+        }else if(status == 1){
+            this.experimentMapper.updateExpEndDateNull(exId);
+        }
     }
 
     @Override
